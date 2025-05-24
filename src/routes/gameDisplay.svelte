@@ -3,6 +3,8 @@
   export let name: string;
   export let user1Playtime: number;
   export let user2Playtime: number;
+  export let username1: string;
+  export let username2: string;
 
   const formatPlaytime = (minutes: number): string => {
     const hours = Math.floor(minutes / 60);
@@ -20,8 +22,8 @@
   <div class="info">
     <h3>{name}</h3>
     <div class="playtime">
-      <p><strong>User 1:</strong> {formatPlaytime(user1Playtime)}</p>
-      <p><strong>User 2:</strong> {formatPlaytime(user2Playtime)}</p>
+      <p><strong>{username1}:</strong> {formatPlaytime(user1Playtime)}</p>
+      <p><strong>{username2}:</strong> {formatPlaytime(user2Playtime)}</p>
     </div>
   </div>
 </div>

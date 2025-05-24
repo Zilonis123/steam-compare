@@ -23,4 +23,8 @@ export const getCommonGames = async (id1: string, id2: string): Promise<GameWith
 		}));
 };
 
-
+export const getUsername = async (steamid: string): Promise<string> => {
+	const res = await fetch(`/api/getUsername?steamid=${steamid}`)
+	const data = await res.json()
+	return data.response.players[0].personaname
+}
