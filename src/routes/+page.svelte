@@ -2,6 +2,7 @@
   import GameDisplay from "./GameDisplay.svelte";
   import { getCommonGames, getUsername } from "$lib/api/steam";
   import type { GameWithBothPlaytimes } from "$lib/types";
+  import { parseSteamId } from "$lib/utils/parseSteamId";
 
   let steamId1: string = "76561199578605897";
   let steamId2: string = "76561198321090953";
@@ -15,10 +16,17 @@
     loading = true;
     error = null;
 
+    const id1 = parseSteamId(steamId1);
+    const id2 = parseSteamId(steamId2);
+
+    if (id1 == null || id2 == null) {
+      return;
+    }
+
     try {
-      username1 = await getUsername(steamId1);
-      username2 = await getUsername(steamId2);
-      games = await getCommonGames(steamId1, steamId2);
+      username1 = await getUsername(id1);
+      username2 = await getUsername(id2);
+      games = await getCommonGames(id1, id2);
     } catch (e) {
       error = "Failed to fetch games. Check your Steam IDs.";
     }
